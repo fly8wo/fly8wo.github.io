@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="whatiwhere">
 <meta property="og:description" content="ROP合集ROP-ret2libc环境:glibc 2.31  Ubuntu20.04  源码: 1234567891011121314151617181920212223&#x2F;&#x2F; gcc -O0 -fno-stack-protector ret2libc.c -no-pie -o retlibc#include &lt;stdlib.h&gt;#include &lt;stdio.h&gt;#inc">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2021/12/13/ROP-md/ROP-md.assets/image-20211212214556969.png">
-<meta property="og:image" content="http://example.com/2021/12/13/ROP-md/ROP-md.assets/image-20211212214907076.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/fly8wo/blogpic/image1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/fly8wo/blogpic/image2.png">
 <meta property="article:published_time" content="2021-12-13T01:31:42.000Z">
-<meta property="article:modified_time" content="2021-12-13T01:33:39.734Z">
+<meta property="article:modified_time" content="2021-12-13T01:48:00.815Z">
 <meta property="article:author" content="whatiwhere">
 <meta property="article:tag" content="Pwn">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/12/13/ROP-md/ROP-md.assets/image-20211212214556969.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/fly8wo/blogpic/image1.png">
 
 <link rel="canonical" href="http://example.com/2021/12/13/ROP-md/">
 
@@ -190,7 +190,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-12-13 09:31:42 / Modified: 09:33:39" itemprop="dateCreated datePublished" datetime="2021-12-13T09:31:42+08:00">2021-12-13</time>
+              <time title="Created: 2021-12-13 09:31:42 / Modified: 09:48:00" itemprop="dateCreated datePublished" datetime="2021-12-13T09:31:42+08:00">2021-12-13</time>
             </span>
 
           
@@ -208,14 +208,13 @@
 <p>源码:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gcc -O0 -fno-stack-protector ret2libc.c -no-pie -o retlibc</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_name</span><span class="params">(<span class="keyword">char</span> *input)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">0x20</span>]; <span class="comment">// strcpy(buf, input);</span></span><br><span class="line">    <span class="built_in">memcpy</span>(buf, input, <span class="number">0x100</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello %s\n&quot;</span>, buf);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">0x100</span>];</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;welcome to stack5&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Here is a gift: %p\n&quot;</span>, <span class="built_in">stdout</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;input your name plz&quot;</span>);</span><br><span class="line">    read(<span class="number">0</span>, buf, <span class="number">0x100</span>);</span><br><span class="line">    print_name(buf);</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>stdout是什么那我们不妨查一查</p>
+<p>stdout ??</p>
 <p>C语言中的 stdout 是一个定义在&lt;stdio.h&gt;的宏（macro），它展开到一个 FILE* （“指向 FILE 的 指针”）类型的表达式（不一定是常量），这个表达式指向一个与标准输出流（standard output stream）相关连的 FILE 对象。 只是方便操作输出，比如传给一个函数等等。这时函数的输出就不是输出到文件，而是传进来的 stdout文件指针，即标准输出。</p>
 <p>stdout（Standardoutput）标准输出 stdin（Standardinput）标准输入 stderr（Standarderror）标准错误 接下来我们debug一下文件 文件会给我们stdout的地址而且每次都会变化 libc是c函数库它会被加载在进程空间 运行后产看内存<br>之前介绍过了gdb 与 pwndbg，这里做pwn题目演示就用pwndbg了<br>pwngdb在调试对调试堆的数据结构时候很方便<br>peda在查找字符串等功能时方便</p>
 <h6 id="安装pwndgb"><a href="#安装pwndgb" class="headerlink" title="安装pwndgb"></a>安装pwndgb</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pwndbg/pwndbg</span><br><span class="line"><span class="built_in">cd</span> pwndbg</span><br><span class="line">sudo ./setup.sh</span><br></pre></td></tr></table></figure>
 
 <h4 id="切换："><a href="#切换：" class="headerlink" title="切换："></a>切换：</h4><p>vim ~/.gdbinit</p>
-<p><img src="ROP-md.assets/image-20211212214556969.png" alt="image-20211212214556969"></p>
-<p>注释掉peda 保存</p>
+<p><img src="https://cdn.jsdelivr.net/gh/fly8wo/blogpic/image1.png" alt="image1">注释掉peda 保存</p>
 <p>首先先gdb调试启动程序<br>gdb -r ret2libc</p>
 <blockquote>
 <p>r</p>
@@ -224,7 +223,7 @@
 <blockquote>
 <p>vmmap</p>
 </blockquote>
-<p><img src="ROP-md.assets/image-20211212214907076.png" alt="image-20211212214907076"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/fly8wo/blogpic/image2.png" alt="image2"></p>
 <p>其中后缀为.so文件为libc 虽然地址每次都会变化但是它的偏移量是不会变化的 我们先调试一下 我们先下一个断点在printf</p>
 <p>…ToDo….</p>
 
