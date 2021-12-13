@@ -20,19 +20,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="11月24重新绑定域名 设置主题  一直在工作💼 后期应该会陆续慢慢更新 主要为 移动安全 二进制安全 pwn相关的学习笔记📒">
+  <meta name="description" content="ROP合集ROP-ret2libc环境:glibc 2.31  Ubuntu20.04  源码: 1234567891011121314151617181920212223&#x2F;&#x2F; gcc -O0 -fno-stack-protector ret2libc.c -no-pie -o retlibc#include &lt;stdlib.h&gt;#include &lt;stdio.h&gt;#inc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2020/12/15/hello-world/index.html">
+<meta property="og:title" content="ROP.md">
+<meta property="og:url" content="http://example.com/2021/12/13/ROP-md/index.html">
 <meta property="og:site_name" content="whatiwhere">
-<meta property="og:description" content="11月24重新绑定域名 设置主题  一直在工作💼 后期应该会陆续慢慢更新 主要为 移动安全 二进制安全 pwn相关的学习笔记📒">
+<meta property="og:description" content="ROP合集ROP-ret2libc环境:glibc 2.31  Ubuntu20.04  源码: 1234567891011121314151617181920212223&#x2F;&#x2F; gcc -O0 -fno-stack-protector ret2libc.c -no-pie -o retlibc#include &lt;stdlib.h&gt;#include &lt;stdio.h&gt;#inc">
 <meta property="og:locale">
-<meta property="article:published_time" content="2020-12-15T07:37:15.000Z">
-<meta property="article:modified_time" content="2020-12-10T09:03:07.000Z">
+<meta property="og:image" content="http://example.com/2021/12/13/ROP-md/ROP-md.assets/image-20211212214556969.png">
+<meta property="og:image" content="http://example.com/2021/12/13/ROP-md/ROP-md.assets/image-20211212214907076.png">
+<meta property="article:published_time" content="2021-12-13T01:31:42.000Z">
+<meta property="article:modified_time" content="2021-12-13T01:33:39.734Z">
 <meta property="article:author" content="whatiwhere">
+<meta property="article:tag" content="Pwn">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/12/13/ROP-md/ROP-md.assets/image-20211212214556969.png">
 
-<link rel="canonical" href="http://example.com/2020/12/15/hello-world/">
+<link rel="canonical" href="http://example.com/2021/12/13/ROP-md/">
 
 
 <script id="page-configurations">
@@ -45,7 +49,7 @@
   };
 </script>
 
-  <title>Hello World | whatiwhere</title>
+  <title>ROP.md | whatiwhere</title>
   
 
 
@@ -162,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/15/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/13/ROP-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://ftp.bmp.ovh/imgs/2020/12/d383d463e102eca4.png">
@@ -175,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          ROP.md
         </h1>
 
         <div class="post-meta">
@@ -184,16 +188,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-12-15 15:37:15" itemprop="dateCreated datePublished" datetime="2020-12-15T15:37:15+08:00">2020-12-15</time>
+              <time title="Created: 2021-12-13 09:31:42 / Modified: 09:33:39" itemprop="dateCreated datePublished" datetime="2021-12-13T09:31:42+08:00">2021-12-13</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-10 17:03:07" itemprop="dateModified" datetime="2020-12-10T17:03:07+08:00">2020-12-10</time>
-              </span>
 
           
 
@@ -206,27 +204,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>11月24重新绑定域名 设置主题 </p>
-<p>一直在工作💼</p>
-<p>后期应该会陆续慢慢更新</p>
-<p>主要为 移动安全 二进制安全 pwn相关的学习笔记📒</p>
-<a id="more"></a>
+        <h2 id="ROP合集"><a href="#ROP合集" class="headerlink" title="ROP合集"></a>ROP合集</h2><h3 id="ROP-ret2libc"><a href="#ROP-ret2libc" class="headerlink" title="ROP-ret2libc"></a>ROP-ret2libc</h3><p>环境:glibc 2.31  Ubuntu20.04 </p>
+<p>源码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gcc -O0 -fno-stack-protector ret2libc.c -no-pie -o retlibc</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_name</span><span class="params">(<span class="keyword">char</span> *input)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">0x20</span>]; <span class="comment">// strcpy(buf, input);</span></span><br><span class="line">    <span class="built_in">memcpy</span>(buf, input, <span class="number">0x100</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello %s\n&quot;</span>, buf);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">0x100</span>];</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;welcome to stack5&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Here is a gift: %p\n&quot;</span>, <span class="built_in">stdout</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;input your name plz&quot;</span>);</span><br><span class="line">    read(<span class="number">0</span>, buf, <span class="number">0x100</span>);</span><br><span class="line">    print_name(buf);</span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>stdout是什么那我们不妨查一查</p>
+<p>C语言中的 stdout 是一个定义在&lt;stdio.h&gt;的宏（macro），它展开到一个 FILE* （“指向 FILE 的 指针”）类型的表达式（不一定是常量），这个表达式指向一个与标准输出流（standard output stream）相关连的 FILE 对象。 只是方便操作输出，比如传给一个函数等等。这时函数的输出就不是输出到文件，而是传进来的 stdout文件指针，即标准输出。</p>
+<p>stdout（Standardoutput）标准输出 stdin（Standardinput）标准输入 stderr（Standarderror）标准错误 接下来我们debug一下文件 文件会给我们stdout的地址而且每次都会变化 libc是c函数库它会被加载在进程空间 运行后产看内存<br>之前介绍过了gdb 与 pwndbg，这里做pwn题目演示就用pwndbg了<br>pwngdb在调试对调试堆的数据结构时候很方便<br>peda在查找字符串等功能时方便</p>
+<h6 id="安装pwndgb"><a href="#安装pwndgb" class="headerlink" title="安装pwndgb"></a>安装pwndgb</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pwndbg/pwndbg</span><br><span class="line"><span class="built_in">cd</span> pwndbg</span><br><span class="line">sudo ./setup.sh</span><br></pre></td></tr></table></figure>
 
-
-<p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h4 id="切换："><a href="#切换：" class="headerlink" title="切换："></a>切换：</h4><p>vim ~/.gdbinit</p>
+<p><img src="ROP-md.assets/image-20211212214556969.png" alt="image-20211212214556969"></p>
+<p>注释掉peda 保存</p>
+<p>首先先gdb调试启动程序<br>gdb -r ret2libc</p>
+<blockquote>
+<p>r</p>
+</blockquote>
+<p>先查看下内存</p>
+<blockquote>
+<p>vmmap</p>
+</blockquote>
+<p><img src="ROP-md.assets/image-20211212214907076.png" alt="image-20211212214907076"></p>
+<p>其中后缀为.so文件为libc 虽然地址每次都会变化但是它的偏移量是不会变化的 我们先调试一下 我们先下一个断点在printf</p>
+<p>…ToDo….</p>
 
     </div>
 
@@ -235,6 +235,10 @@
     
 
       <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Pwn/" rel="tag"><i class="fa fa-tag"></i> Pwn</a>
+          </div>
 
         
 
@@ -242,13 +246,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/10/diary/" rel="prev" title="📅Diary">
-      <i class="fa fa-chevron-left"></i> 📅Diary
+    <a href="/2021/08/23/Diadry-md/" rel="prev" title="Diadry.md">
+      <i class="fa fa-chevron-left"></i> Diadry.md
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/08/22/Pwn%E5%AD%A6%E4%B9%A0%E5%88%B7%E9%A2%98%E6%B1%87%E6%80%BB-md/" rel="next" title="Pwn学习刷题汇总.md">
-      Pwn学习刷题汇总.md <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -307,7 +308,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP%E5%90%88%E9%9B%86"><span class="nav-number">1.</span> <span class="nav-text">ROP合集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROP-ret2libc"><span class="nav-number">1.1.</span> <span class="nav-text">ROP-ret2libc</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AE%89%E8%A3%85pwndgb"><span class="nav-number">1.1.0.0.1.</span> <span class="nav-text">安装pwndgb</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">切换：</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
